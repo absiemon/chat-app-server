@@ -66,11 +66,12 @@ module.exports.setAvatar = async (req, res, next)=>{
     try {
         const userId = req.params.id;
         const avatarImage = req.body.image;
+        console.log(avatarImage.avatarImage);
         const userData = await User.findByIdAndUpdate(userId, {
             isAvatarImageSet: true, 
-            avatarImage,
+            avatarImage: avatarImage.avatarImage,
         })
-
+        
         return res.json({isSet: userData.isAvatarImageSet, image: userData.avatarImage })
     } catch (error) {
         console.log({mgs:"Internal Sever eroor", error});
